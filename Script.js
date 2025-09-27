@@ -1,9 +1,6 @@
-
-// ========== Accessibility Toolbar ==========
-let fontSize = 16;
-
 document.addEventListener('DOMContentLoaded', () => {
-
+  // ===== Accessibility Toolbar =====
+  let fontSize = 16;
   const easyRead = document.getElementById("easyRead");
 
   document.getElementById("increaseText").addEventListener("click", () => {
@@ -21,33 +18,29 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById("contrastSelect").addEventListener("change", (e) => {
-    document.body.classList.remove("high-contrast", "deuteranopia", "tritanopia");
-    if (e.target.value !== "default") document.body.classList.add(e.target.value);
+    document.body.classList.remove("high-contrast","deuteranopia","tritanopia");
+    if(e.target.value !== "default") document.body.classList.add(e.target.value);
   });
 
   document.getElementById("fontSelect").addEventListener("change", (e) => {
-    document.body.classList.remove("opendyslexic", "arial");
-    if (e.target.value !== "default") document.body.classList.add(e.target.value);
+    document.body.classList.remove("opendyslexic","arial");
+    if(e.target.value !== "default") document.body.classList.add(e.target.value);
   });
 
-  // ========== Text-to-Speech ==========
-  let synth = window.speechSynthesis, utter = null;
+  // ===== Text-to-Speech =====
+  const synth = window.speechSynthesis;
   const ttsTextContainer = document.getElementById("ttsText");
 
-  function highlightTTS(text, container) {
-    if (synth.speaking) synth.cancel();
+  function highlightTTS(text, container){
+    if(synth.speaking) synth.cancel();
     container.innerHTML = "";
     const words = text.split(" ");
     let index = 0;
-    utter = new SpeechSynthesisUtterance(text);
-    utter.onboundary = function (e) {
-      if (e.charIndex >= 0) {
-        const chars = text.slice(0, e.charIndex);
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.onboundary = function(e){
+      if(e.charIndex >= 0){
         const currentWord = words[index] || "";
-        container.innerHTML = text.replace(
-          currentWord,
-          `<mark>${currentWord}</mark>`
-        );
+        container.innerHTML = text.replace(currentWord, `<mark>${currentWord}</mark>`);
         index++;
       }
     };
@@ -60,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById("pauseTTS").addEventListener("click", () => { if(synth.speaking) synth.pause(); });
   document.getElementById("stopTTS").addEventListener("click", () => { if(synth.speaking) synth.cancel(); });
 
-  // ========== Maze Game ==========
+  // ===== Maze Game =====
   const mazeContainer = document.getElementById("mazeContainer");
   const mazeLevelEl = document.getElementById("mazeLevel");
   const mazeTimeEl = document.getElementById("mazeTime");
@@ -142,8 +135,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function movePlayer(dx,dy){
-    const newX=playerPos.x+dx, newY=playerPos.y+dy;
-    if(newX<0||newY<0||newY>=maze.length||newX>=maze[0].length) return;
+    const newX = playerPos.x + dx;
+    const newY = playerPos.y + dy;
+    if(newX<0||newY<0||newX>=maze[0].length||newY>=maze.length) return;
     if(maze[newY][newX]===1) return;
     playerPos={x:newX,y:newY};
     renderMaze();
@@ -151,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function finishLevel(){
-    mazeScore+=10*mazeLevel;
+    mazeScore += 10*mazeLevel;
     mazeScoreEl.textContent=mazeScore;
     mazeBadges.push(`Maze Level ${mazeLevel} Completed`);
     mazeBadgesEl.textContent=mazeBadges.join(", ");
@@ -173,14 +167,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  document.getElementById("voiceCommand").addEventListener("click",()=>{
+  document.getElementById("voiceCommand").addEventListener("click", ()=>{
     if(!("webkitSpeechRecognition" in window)){ alert("Voice recognition not supported."); return; }
     const recognition = new webkitSpeechRecognition();
     recognition.lang="en-US";
     recognition.continuous=true;
     recognition.start();
     recognition.onresult=(event)=>{
-      const command=event.results[event.results.length-1][0].transcript.toLowerCase();
+      const command = event.results[event.results.length-1][0].transcript.toLowerCase();
       if(command.includes("up")) movePlayer(0,-1);
       if(command.includes("down")) movePlayer(0,1);
       if(command.includes("left")) movePlayer(-1,0);
@@ -188,33 +182,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // ========== Memory Game ==========
-  const memoryGame=document.getElementById("memoryGame");
-  const memorySymbols=["🔵","🔺","🟩","⭐","❤️","🌀"];
-  let memoryCards=[...memorySymbols,...memorySymbols], flipped=[], matched=0;
+  // ===== Memory Game =====
+  const memoryGame = document.getElementById("memoryGame");
+  const memorySymbols = ["🔵","🔺","🟩","⭐","❤️","🌀"];
+  let memoryCards = [...memorySymbols,...memorySymbols], flipped=[], matched=0;
 
   function initMemory(){
     memoryCards = [...memorySymbols, ...memorySymbols].sort(()=>Math.random()-0.5);
     memoryGame.innerHTML="";
     flipped=[]; matched=0;
     memoryCards.forEach((symbol,i)=>{
-      const card=document.createElement("div");
+      const card = document.createElement("div");
       card.classList.add("memory-card");
-      card.dataset.symbol=symbol;
-      card.dataset.index=i;
+      card.dataset.symbol = symbol;
+      card.dataset.index = i;
       card.textContent="?";
-      card.addEventListener("click",flipCard);
+      card.addEventListener("click", flipCard);
       memoryGame.appendChild(card);
     });
   }
 
   function flipCard(e){
-    const card=e.target;
+    const card = e.target;
     if(flipped.length===2 || card.classList.contains("matched")) return;
-    card.textContent=card.dataset.symbol;
+    card.textContent = card.dataset.symbol;
     flipped.push(card);
     if(flipped.length===2){
-      if(flipped[0].dataset.symbol===flipped[1].dataset.symbol){
+      if(flipped[0].dataset.symbol === flipped[1].dataset.symbol){
         flipped.forEach(c=>c.classList.add("matched"));
         matched++;
         if(matched===memorySymbols.length) alert("🎉 Memory Game Completed!");
@@ -227,56 +221,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initMemory();
   initMaze(1);
-
-  // ========== Voice Quiz ==========
-  const quizBox=document.getElementById("quizBox");
-  const quizBtn=document.getElementById("startQuiz");
-  const quizQuestions=[
-    {q:"Which is an accessibility feature?",a:"High Contrast Mode",b:"Complex Fonts",correct:"a"},
-    {q:"Which helps colorblind users?",a:"Rainbow gradients",b:"Shape indicators",correct:"b"}
-  ];
-  let qIndex=0;
-
-  quizBtn.addEventListener("click",()=>{qIndex=0; askQuestion(); startQuizVoice();});
-
-  function askQuestion(){
-    if(qIndex>=quizQuestions.length){ quizBox.innerHTML="<p>🎉 Quiz Completed!</p>"; return; }
-    const q=quizQuestions[qIndex];
-    quizBox.innerHTML=`<p>${q.q}</p><p>A) ${q.a}</p><p>B) ${q.b}</p>`;
-  }
-
-  function checkAnswer(ans){
-    if(ans===quizQuestions[qIndex].correct){ quizBox.innerHTML+="<p>✅ Correct!</p>"; } 
-    else { quizBox.innerHTML+="<p>❌ Wrong!</p>"; }
-    qIndex++;
-    setTimeout(askQuestion,1000);
-  }
-
-  function startQuizVoice(){
-    if(!("webkitSpeechRecognition" in window)) return;
-    const recognition=new webkitSpeechRecognition();
-    recognition.lang="en-US";
-    recognition.continuous=true;
-    recognition.start();
-    recognition.onresult=(event)=>{
-      const command=event.results[event.results.length-1][0].transcript.toLowerCase();
-      if(command.includes("option a")) checkAnswer("a");
-      if(command.includes("option b")) checkAnswer("b");
-    }
-  }
-
-  // ========== Community Stories ==========
-  const storyForm=document.getElementById("storyForm");
-  const storyInput=document.getElementById("storyInput");
-  const storyList=document.getElementById("storyList");
-
-  storyForm.addEventListener("submit",(e)=>{
-    e.preventDefault();
-    if(!storyInput.value.trim()) return;
-    const story=document.createElement("p");
-    story.textContent="📝 "+storyInput.value;
-    storyList.appendChild(story);
-    storyInput.value="";
-  });
-
 });
