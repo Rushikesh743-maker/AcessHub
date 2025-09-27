@@ -44,8 +44,8 @@ AccessHub is a web-based platform designed to make learning, interaction, and ga
 ---
 ###Technologies Used
 
-HTML5 – Semantic markup and structure.
-CSS3 – Styling, responsive design, hover/focus effects.
-JavaScript (ES6) – Logic for accessibility, games, voice quiz, TTS.
-Canvas Confetti – Celebration effect on maze completion.
-OpenDyslexic Font – Dyslexia-friendly reading experience.
+-HTML5 – Semantic markup and structure.
+-CSS3 – Styling, responsive design, hover/focus effects.
+-JavaScript (ES6) – Logic for accessibility, games, voice quiz, TTS.
+-Canvas Confetti – Celebration effect on maze completion.
+-OpenDyslexic Font – Dyslexia-friendly reading experience.
