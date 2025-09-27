@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AccessHub - Inclusive Web</title>
+
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Dyslexia-friendly font -->
+  <link href="https://fonts.cdnfonts.com/css/opendyslexic" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>🌍 AccessHub</h1>
+    <p>Breaking barriers with inclusive technology</p>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#maze">Maze Game</a>
+      <a href="#memory">Memory Game</a>
+      <a href="#quiz">Voice Quiz</a>
+      <a href="#stories">Community</a>
+      <a href="#resources">Resources</a>
+    </nav>
+  </header>
+
+  <!-- Accessibility Toolbar -->
+  <section id="toolbar">
+    <button id="increaseText">A+</button>
+    <button id="decreaseText">A-</button>
+    <button id="easyReadBtn">Easy Read Mode</button>
+    <select id="contrastSelect">
+      <option value="default">Default</option>
+      <option value="high-contrast">High Contrast</option>
+      <option value="deuteranopia">Deuteranopia</option>
+      <option value="tritanopia">Tritanopia</option>
+    </select>
+    <select id="fontSelect">
+      <option value="default">Default Font</option>
+      <option value="opendyslexic">Dyslexia Friendly</option>
+      <option value="arial">Arial</option>
+    </select>
+  </section>
+
+  <!-- Features -->
+  <section id="features">
+    <h2>✨ Features</h2>
+    <ul>
+      <li>🔊 Text-to-Speech with highlighting</li>
+      <li>🎮 Maze Game with voice + icons</li>
+      <li>🧩 Memory game with shapes + symbols</li>
+      <li>🎤 Voice quiz game</li>
+      <li>📝 Share your story</li>
+      <li>📚 Resource hub</li>
+    </ul>
+  </section>
+
+  <!-- Easy Read Section -->
+  <section id="easyRead" class="hidden">
+    <h2>📖 Easy Read Mode</h2>
+    <p>This website is made for everyone. You can listen, play games, and learn with ease.</p>
+  </section>
+
+  <!-- Text-to-Speech -->
+  <section id="tts">
+    <h2>🔊 Text-to-Speech</h2>
+    <p id="ttsText">
+        <p> Dyslexia is a learning difference that affects reading, writing, and comprehension. 
+    People with dyslexia may read slower or confuse similar-looking letters. 
+    To help, our website provides dyslexia-friendly fonts like OpenDyslexic and Arial, clear spacing, 
+    and simple layouts to make reading easier and reduce strain. 
+    Users can also use Text-to-Speech to listen to content instead of reading.</p>
+
+    <p>Deuteranopia is a type of red-green color blindness, making it hard to distinguish between red and green shades. 
+    Many websites rely on these colors for information, which can be confusing for affected users. 
+    Our website provides color filters and alternative symbols to ensure that everyone can perceive the content correctly. 
+    Games, charts, and resources are adapted to be clearly visible for users with deuteranopia.</p>
+
+    Tritanopia is a blue-yellow color blindness that makes it difficult to distinguish between blue and yellow colors. 
+    This condition can affect the understanding of graphs, buttons, and text highlights. 
+    Our website uses adjusted color palettes and high-contrast elements to ensure clarity. 
+    Interactive elements and games are designed to remain fully accessible, 
+    providing an inclusive experience for users with tritanopia.</p>
+    <button id="playTTS">▶ Play</button>
+    <button id="pauseTTS">⏸ Pause</button>
+    <button id="stopTTS">⏹ Stop</button>
+  </section>
+
+  <!-- Maze Game -->
+  <section id="maze">
+    <h2>🧭 Maze Game</h2>
+    <p>Use arrow keys or voice commands ("up", "down", "left", "right")</p>
+    <button id="voiceCommand">🎤 Start Voice Control</button>
+    <div id="mazeContainer"></div>
+    <div class="maze-info">
+      <p>Level: <span id="mazeLevel">1</span></p>
+      <p>Time: <span id="mazeTime">0</span>s</p>
+      <p>Score: <span id="mazeScore">0</span></p>
+      <p>Badges: <span id="mazeBadges"></span></p>
+    </div>
+  </section>
+
+  <!-- Memory Game -->
+  <section id="memory">
+    <h2>🧠 Memory Game</h2>
+    <p>Match shapes and sounds! Great for colorblind accessibility.</p>
+    <div id="memoryGame"></div>
+  </section>
+
+  <!-- Voice Quiz -->
+  <section id="quiz">
+    <h2>🎤 Voice Quiz</h2>
+    <p>Answer with your voice! Say "Option A" or "Option B".</p>
+    <div id="quizBox"></div>
+    <button id="startQuiz">Start Quiz</button>
+  </section>
+
+  <!-- Community Stories -->
+  <section id="stories">
+    <h2>👥 Community Stories</h2>
+    <form id="storyForm">
+      <textarea id="storyInput" placeholder="Share your accessibility story..."></textarea>
+      <button type="submit">Submit</button>
+    </form>
+    <div id="storyList"></div>
+  </section>
+
+  <!-- Resource Hub -->
+  <section id="resources">
+    <h2>📚 Resource Hub</h2>
+    <ul>
+      <li><a href="https://webaim.org" target="_blank">WebAIM: Web Accessibility</a></li>
+      <li><a href="https://www.w3.org/WAI/" target="_blank">W3C Accessibility Initiative</a></li>
+      <li><a href="https://www.nvaccess.org/" target="_blank">NVDA Screen Reader</a></li>
+      <li><a href="https://www.apple.com/accessibility/" target="_blank">Apple Accessibility</a></li>
+      <li><a href="https://www.microsoft.com/en-us/accessibility" target="_blank">Microsoft Accessibility</a></li>
+    </ul>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>🌍 AccessHub | Built for Inclusion</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
